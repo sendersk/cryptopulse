@@ -76,6 +76,12 @@ http://127.0.0.1:5000
 
 ---
 
+# Future Improvements
+
+- Compare multiple coins
+- Export data to CSV/JSON
+- Add notifications for major price changes
+
 ## Author
 
 Created by **Przemysław Senderski**
