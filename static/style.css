@@ -1,0 +1,160 @@
+/* Basic resets */
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #0f172a; /* dark navy */
+  color: #f8fafc;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+a {
+  color: #38bdf8;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Header and navigation */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1e293b;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.header nav a {
+  margin: 0 0.8rem;
+  color: #e2e8f0;
+  font-weight: 500;
+}
+
+.header nav a:hover {
+  color: #38bdf8;
+}
+
+/* Buttons */
+button {
+  background: #334155;
+  color: #f8fafc;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #475569;
+}
+
+/* Container and sections */
+.container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.section-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* Tables */
+.crypto-table, table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #1e293b;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.crypto-table th, .crypto-table td,
+table th, table td {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid #334155;
+}
+
+.crypto-table th {
+  background: #0f172a;
+  color: #38bdf8;
+  font-weight: 600;
+  text-align: left;
+}
+
+.crypto-table tr:hover, table tr:hover {
+  background-color: #334155;
+}
+
+/* Positive and negative coloring */
+.pos {
+  color: #22c55e;
+  font-weight: 600;
+}
+
+.neg {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+/* Summary boxes */
+.summary ul {
+  list-style: none;
+  padding: 0;
+  background: #1e293b;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+.summary li {
+  padding: 0.4rem 0;
+  border-bottom: 1px solid #334155;
+}
+
+.summary li:last-child {
+  border-bottom: none;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 1rem;
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+/* Light theme */
+.light-mode {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+.light-mode .header {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.light-mode table, .light-mode .crypto-table {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.light-mode .crypto-table th {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.light-mode a {
+  color: #0284c7;
+}
