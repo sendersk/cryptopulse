@@ -40,6 +40,7 @@ cryptopulse/
 ├── utils.py # Utility functions (optional)
 │
 ├── templates/
+│ ├── base.html
 │ ├── index.html # Dashboard view
 │ └── analytics.html # Charts & statistics (next steps)
 │
