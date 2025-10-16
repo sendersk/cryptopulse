@@ -1,10 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}CryptoPulse — Analytics{% endblock %}
 
-</body>
-</html>
+{% block content %}
+<h2 class="section-title">Market Analytics</h2>
+
+<section class="summary">
+  <h3>📊 Summary</h3>
+  <ul>
+    <li><strong>Total coins:</strong> {{ summary.total_coins }}</li>
+    <li><strong>Average price:</strong> ${{ summary.average_price }}</li>
+    <li><strong>Average 24h change:</strong> {{ summary.average_change_24h }}%</li>
+    <li><strong>Total Market Cap:</strong> ${{ "{:,.0f}".format(summary.total_market_cap) }}</li>
+  </ul>
+</section>
+
+<section class="gainers">
+  <h3>🚀 Top Gainers</h3>
+  <table>
+    <tr><th>Name</th><th>Symbol</th><th>24h Change</th></tr>
+    {% for c in top_gainers %}
+    <tr>
+      <td>{{ c.name }}</td>
+      <td>{{ c.symbol }}</td>
+      <td class="pos">{{ "%.2f"|format(c.price_change_24h) }}%</td>
+    </tr>
+    {% endfor %}
+  </table>
+</section>
+
+<section class="losers">
+  <h3>📉 Top Losers</h3>
+  <table>
+    <tr><th>Name</th><th>Symbol</th><th>24h Change</th></tr>
+    {% for c in top_losers %}
+    <tr>
+      <td>{{ c.name }}</td>
+      <td>{{ c.symbol }}</td>
+      <td class="neg">{{ "%.2f"|format(c.price_change_24h) }}%</td>
+    </tr>
+    {% endfor %}
+  </table>
+</section>
+
+<section class="chart">
+  <h3>💹 Price Overview</h3>
+  <canvas id="priceChart"></canvas>
+</section>
+
+<section class="correlation">
+  <h3>🔗 Correlation Matrix</h3>
+  <div class="corr-table">
+    {{ corr | safe }}
+  </div>
+</section>
+
+<script>
+  const data = {{ chart_data | tojson }};
+  const ctx = document.getElementById("priceChart");
+
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: data.names,
+      datasets: [{
+        label: "Current Price (USD)",
+        data: data.prices,
+        backgroundColor: "rgba(75, 192, 192, 0.5)",
+        borderColor: "rgba(75, 192, 192, 1)",
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: { beginAtZero: false }
+      }
+    }
+  });
+</script>
+{% endblock %}

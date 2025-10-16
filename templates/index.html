@@ -1,10 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}CryptoPulse — Dashboard{% endblock %}
 
-</body>
-</html>
+{% block content %}
+<h2 class="section-title">Top 10 Cryptocurrencies</h2>
+
+<table class="crypto-table">
+  <thead>
+    <tr>
+      <th><a href="/?sort=name">Name</a></th>
+      <th><a href="/?sort=current_price">Price (USD)</a></th>
+      <th><a href="/?sort=price_change_24h">24h Change</a></th>
+      <th><a href="/?sort=market_cap">Market Cap</a></th>
+      <th><a href="/?sort=total_volume">Volume</a></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for coin in cryptos %}
+    <tr>
+      <td>{{ coin.name }} ({{ coin.symbol.upper() }})</td>
+      <td>${{ "%.2f"|format(coin.current_price) }}</td>
+      <td class="{{ 'pos' if coin.price_change_24h > 0 else 'neg' }}">
+        {{ "%.2f"|format(coin.price_change_24h) }}%
+      </td>
+      <td>${{ "{:,.0f}".format(coin.market_cap) }}</td>
+      <td>${{ "{:,.0f}".format(coin.total_volume) }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
