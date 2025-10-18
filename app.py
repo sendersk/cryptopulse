@@ -54,7 +54,7 @@ def analytics():
     chart_data = {
         "names": df["name"].tolist(),
         "prices": df["current_price"].tolist(),
-        "changes": df["price_change_24h"].tolist()
+        "changes": df["price_change_percentage_24h"].tolist()
     }
 
     return render_template(

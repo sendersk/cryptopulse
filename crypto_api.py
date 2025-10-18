@@ -105,7 +105,7 @@ def get_data_as_dataframe(data):
 
     df = pd.DataFrame(data)
     df["current_price"] = df["current_price"].astype(float)
-    df["price_change_24h"] = df["price_change_24h"].astype(float)
+    df["price_change_percentage_24h"] = df["price_change_percentage_24h"].astype(float)
     df["market_cap"] = df["market_cap"].astype(float)
     df["total_volume"] = df["total_volume"].astype(float)
     return df
@@ -131,6 +131,6 @@ if __name__ == "__main__":
         #Convert to DataFrame for quick preview
         df = get_data_as_dataframe(coins)
         print("\n Top 10 Cryptocurrencies:\n")
-        print(df[["name", "symbol", "current_price", "price_change_24h"]])
+        print(df[["name", "symbol", "current_price", "price_change_percentage_24h"]])
     else:
         print("\n Failed to fetch data from CoinGecko API.\n")

@@ -22,7 +22,7 @@
     <tr>
       <td>{{ c.name }}</td>
       <td>{{ c.symbol }}</td>
-      <td class="pos">{{ "%.2f"|format(c.price_change_24h) }}%</td>
+      <td class="pos">{{ "%.2f"|format(c.price_change_percentage_24h) }}%</td>
     </tr>
     {% endfor %}
   </table>
@@ -36,7 +36,7 @@
     <tr>
       <td>{{ c.name }}</td>
       <td>{{ c.symbol }}</td>
-      <td class="neg">{{ "%.2f"|format(c.price_change_24h) }}%</td>
+      <td class="neg">{{ "%.2f"|format(c.price_change_percentage_24h) }}%</td>
     </tr>
     {% endfor %}
   </table>

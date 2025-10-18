@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}📊 CryptoPulse Charts{% endblock %}
+
+{% block content %}
+<div class="header">
+  <h1>📈 Cryptocurrency Charts</h1>
+  <p>Interactive visualizations of market data powered by Chart.js</p>
+</div>
+
+<!-- Chart containers -->
+<div class="chart-grid">
+  <div class="chart-card">
+    <canvas id="priceChart"></canvas>
+  </div>
+  <div class="chart-card">
+    <canvas id="volumeChart"></canvas>
+  </div>
+  <div class="chart-card">
+    <canvas id="changeChart"></canvas>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // Data passed from Flask backend
+  const chartData = {{ chart_data | tojson }};
+  const names = chartData.names;
+  const prices = chartData.prices;
+  const volumes = chartData.volumes;
+  const changes = chartData.changes;
+
+  // --- Chart 1: Price ---
+  new Chart(document.getElementById("priceChart"), {
+    type: "bar",
+    data: {
+      labels: names,
+      datasets: [{
+        label: "Price (USD)",
+        data: prices,
+        borderWidth: 1
+      }]
+    },
+    options: {
+      plugins: {
+        title: {
+          display: true,
+          text: "💰 Current Prices"
+        }
+      },
+      scales: { y: { beginAtZero: false } }
+    }
+  });
+
+  // --- Chart 2: Volume ---
+  new Chart(document.getElementById("volumeChart"), {
+    type: "line",
+    data: {
+      labels: names,
+      datasets: [{
+        label: "24h Volume (USD)",
+        data: volumes,
+        borderWidth: 2,
+        tension: 0.3
+      }]
+    },
+    options: {
+      plugins: {
+        title: {
+          display: true,
+          text: "📊 24h Trading Volume"
+        }
+      },
+      scales: { y: { beginAtZero: true } }
+    }
+  });
+
+  // --- Chart 3: 24h Change ---
+  new Chart(document.getElementById("changeChart"), {
+    type: "bar",
+    data: {
+      labels: names,
+      datasets: [{
+        label: "24h Change (%)",
+        data: changes,
+        borderWidth: 1
+      }]
+    },
+    options: {
+      plugins: {
+        title: {
+          display: true,
+          text: "📈 24h Price Change"
+        }
+      },
+      scales: { y: { beginAtZero: false } }
+    }
+  });
+</script>
+{% endblock %}
