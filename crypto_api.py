@@ -47,15 +47,16 @@ def fetch_top_coins(vs_currency: str = "usd", limit: int = 10, retries: int = 3,
             # Keep only relevant fields
             cleaned_data = [
                 {
-                    "name": c["name"],
-                    "symbol": c["symbol"].upper(),
-                    "current_price": c["current_price"],
-                    "price_change_24h": c["price_change_percentage_24h"],
-                    "market_cap": c["market_cap"],
-                    "total_volume": c["total_volume"],
-                    "last_updated": c["last_updated"],
+                    "name": coin.get("name"),
+                    "symbol": coin.get("symbol", "").upper(),
+                    "current_price": coin.get("current_price", 0),
+                    "price_change_percentage_24h": coin.get("price_change_percentage_24h")
+                                                   or coin.get("price_change_percentage_24h_in_currency", 0),
+                    "total_volume": coin.get("total_volume", 0),
+                    "market_cap": coin.get("market_cap", 0),
+                    "image": coin.get("image"),
                 }
-                for c in data
+                for coin in data
             ]
 
             logging.info(f"Successfully fetched {len(cleaned_data)} coins from CoinGecko API.")
