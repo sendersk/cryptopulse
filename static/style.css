@@ -158,3 +158,51 @@ table th, table td {
 .light-mode a {
   color: #0284c7;
 }
+
+.light-mode .summary {
+  background-color: #ffffff;
+  color: #0f172a;
+  border: 1px solid #e6e6e6;
+  box-shadow: none;
+}
+
+.light-mode .summary ul {
+  background: transparent;
+  color: #0f172a;
+  border: none;
+  padding: 0.75rem;
+}
+
+.light-mode .summary li {
+  border-bottom: 1px solid #f1f5f9;
+  color: #0f172a;
+}
+
+.light-mode .summary li:last-child {
+  border-bottom: none;
+}
+
+.light-mode .summary h3,
+.light-mode .summary strong {
+  color: #0f172a;
+}
+
+.light-mode .summary a {
+  color: #0369a1;
+}
+
+.light-mode .section-title {
+  color: #0f172a;
+}
+
+.light-mode .chart-container,
+.light-mode .crypto-table,
+.light-mode table {
+  background-color: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 1px 3px rgba(16,24,40,0.04);
+}
+
+.light-mode .footer {
+  color: #475569;
+}
