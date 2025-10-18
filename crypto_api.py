@@ -1,5 +1,3 @@
-from pickletools import float8
-
 import requests
 import logging
 import time
@@ -134,3 +132,7 @@ if __name__ == "__main__":
         print(df[["name", "symbol", "current_price", "price_change_percentage_24h"]])
     else:
         print("\n Failed to fetch data from CoinGecko API.\n")
+
+
+
+    print(json.dumps(coins[:3], indent=2))

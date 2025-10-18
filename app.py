@@ -71,17 +71,17 @@ def analytics():
 @app.route("/charts")
 def charts():
     data = fetch_top_coins()
-    if data is None:
-        return "Error: could not fetch data from API", 500
 
+    # Build chart data safely
     chart_data = {
         "names": [coin["name"] for coin in data],
-        "prices": [coin["current_price"] for coin in data],
-        "volumes": [coin["total_volume"] for coin in data],
-        "changes": [coin["price_change_percentage_24h"] for coin in data],
+        "prices": [coin.get("current_price", 0) for coin in data],
+        "volumes": [coin.get("total_volume", 0) for coin in data],
+        "changes": [coin.get("price_change_percentage_24h", 0) for coin in data],
     }
 
     return render_template("charts.html", chart_data=chart_data)
+
 
 
 # MAIN ENTRY POINT

@@ -206,3 +206,28 @@ table th, table td {
 .light-mode .footer {
   color: #475569;
 }
+
+/* Charts layout */
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.chart-card {
+  background: #1e293b;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease-in-out;
+}
+
+.chart-card:hover {
+  transform: scale(1.02);
+}
+
+.light-mode .chart-card {
+  background: #ffffff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}

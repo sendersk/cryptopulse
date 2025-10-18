@@ -5,7 +5,7 @@
 {% block content %}
 <div class="header">
   <h1>📈 Cryptocurrency Charts</h1>
-  <p>Interactive visualizations of market data powered by Chart.js</p>
+  <p>Interactive visualizations of real-time market data</p>
 </div>
 
 <!-- Chart containers -->
@@ -25,14 +25,25 @@
 {% block scripts %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-  // Data passed from Flask backend
+  // --- Data passed from Flask backend ---
   const chartData = {{ chart_data | tojson }};
+  console.log("Chart data:", chartData); // ✅ Debug info
+
   const names = chartData.names;
   const prices = chartData.prices;
   const volumes = chartData.volumes;
   const changes = chartData.changes;
 
-  // --- Chart 1: Price ---
+  // --- Shared chart style ---
+  const baseOptions = {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      title: { font: { size: 18 } }
+    }
+  };
+
+  // --- Chart 1: Prices ---
   new Chart(document.getElementById("priceChart"), {
     type: "bar",
     data: {
@@ -40,15 +51,16 @@
       datasets: [{
         label: "Price (USD)",
         data: prices,
-        borderWidth: 1
+        backgroundColor: "rgba(56, 189, 248, 0.5)",
+        borderColor: "#38bdf8",
+        borderWidth: 2
       }]
     },
     options: {
+      ...baseOptions,
       plugins: {
-        title: {
-          display: true,
-          text: "💰 Current Prices"
-        }
+        ...baseOptions.plugins,
+        title: { display: true, text: "💰 Current Prices (USD)" }
       },
       scales: { y: { beginAtZero: false } }
     }
@@ -62,22 +74,24 @@
       datasets: [{
         label: "24h Volume (USD)",
         data: volumes,
+        borderColor: "#22c55e",
+        backgroundColor: "rgba(34,197,94,0.2)",
         borderWidth: 2,
-        tension: 0.3
+        tension: 0.3,
+        fill: true
       }]
     },
     options: {
+      ...baseOptions,
       plugins: {
-        title: {
-          display: true,
-          text: "📊 24h Trading Volume"
-        }
+        ...baseOptions.plugins,
+        title: { display: true, text: "📊 24h Trading Volume" }
       },
       scales: { y: { beginAtZero: true } }
     }
   });
 
-  // --- Chart 3: 24h Change ---
+  // --- Chart 3: Price Change ---
   new Chart(document.getElementById("changeChart"), {
     type: "bar",
     data: {
@@ -85,17 +99,18 @@
       datasets: [{
         label: "24h Change (%)",
         data: changes,
-        borderWidth: 1
+        backgroundColor: changes.map(v => v >= 0 ? "rgba(34,197,94,0.5)" : "rgba(239,68,68,0.5)"),
+        borderColor: changes.map(v => v >= 0 ? "#22c55e" : "#ef4444"),
+        borderWidth: 2
       }]
     },
     options: {
+      ...baseOptions,
       plugins: {
-        title: {
-          display: true,
-          text: "📈 24h Price Change"
-        }
+        ...baseOptions.plugins,
+        title: { display: true, text: "📈 24h Price Change (%)" }
       },
-      scales: { y: { beginAtZero: false } }
+      scales: { y: { beginAtZero: true } }
     }
   });
 </script>
